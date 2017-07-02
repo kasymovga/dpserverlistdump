@@ -17,16 +17,16 @@ int main(int argc, char **argv) {
 	int data_len;
 	if (argc != 2) {
 	}
-    if ((sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1) {
+	if ((sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1) {
 		perror("socket");
 		goto finish;
 	}
-    memset(&si_other, 0, sizeof(si_other));
+	memset(&si_other, 0, sizeof(si_other));
 	if (!inet_aton(argv[1], &si_other.sin_addr)) {
 		perror("sendto");
 		goto finish;
 	}
-    si_other.sin_family = AF_INET;
+	si_other.sin_family = AF_INET;
 	si_other.sin_port = htons(DPMASTER_PORT);
 	if (sendto(sock, "\377\377\377\377getservers Nexuiz 3 empty full", 34, 0, (struct sockaddr *)&si_other, sizeof(si_other)) < 0) {
 		perror("sendto");
